@@ -1,5 +1,6 @@
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import Products from '../interfaces/products.interface';
+import Users from '../interfaces/users.interface';
 import connection from './connection';
 
 export const productsModel = {
@@ -20,6 +21,14 @@ export const productsModel = {
     const result = await connection.query<RowDataPacket[]>(sql);
     const [rows] = result;
     return rows as Products[];
+  },
+  async postUsers(user: Users): Promise<Users> {
+    const { username, classe, level, password } = user;
+    const sql = 'INSERT INTO Trybesmith.Users (username, classe, level, password) VALUES (?,?,?,?)';
+
+    await connection
+      .query<ResultSetHeader>(sql, [username, classe, level, password]);
+    return { username, classe, level, password };
   },
 };
 
