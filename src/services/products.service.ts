@@ -7,6 +7,10 @@ const productsService = {
     const result = await productsModel.postProduct(product);
     return result;
   },
+  async getProducts(): Promise<Products[]> {
+    const result = await productsModel.getProducts();
+    return result;
+  },
 };
 
 export default productsService;

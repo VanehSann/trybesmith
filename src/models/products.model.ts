@@ -1,4 +1,4 @@
-import { ResultSetHeader } from 'mysql2';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import Products from '../interfaces/products.interface';
 import connection from './connection';
 
@@ -13,6 +13,13 @@ export const productsModel = {
       name,
       amount,
     };
+  },
+  async getProducts(): Promise<Products[]> {
+    const sql = 'SELECT * from Trybesmith.Products';
+
+    const result = await connection.query<RowDataPacket[]>(sql);
+    const [rows] = result;
+    return rows as Products[];
   },
 };
 
