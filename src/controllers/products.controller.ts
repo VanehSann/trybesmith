@@ -16,6 +16,11 @@ const controllers = {
     console.log(token);
     res.status(201).json({ token });
   },
+  async getOrders(_req: Request, res: Response) {
+    const result = await productsService.getOrders();
+    console.log(result);
+    res.status(200).json(result);
+  },
 
 };
 

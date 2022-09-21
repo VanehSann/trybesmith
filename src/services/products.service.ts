@@ -1,5 +1,6 @@
 // interfaces
 import jwt from 'jsonwebtoken';
+import Orders from '../interfaces/orders.interface';
 import Products from '../interfaces/products.interface';
 import Users from '../interfaces/users.interface';
 // models
@@ -22,9 +23,12 @@ const productsService = {
     const result = await productsModel.postUsers(user);
 
     // token
-    
     const token = jwt.sign(result, JWT_SECRET, { expiresIn: '1h' });
     return { ...result, token };
+  },
+  async getOrders(): Promise<Orders[]> {
+    const result = await productsModel.getOrders();
+    return result;
   },
 
 };
